@@ -1,41 +1,40 @@
 using System;
 
-class Pessoa {
+class NovaConta{
 
-   public string nome;
-   public int idade;
-   public double peso,altura,teste,pesoNovo,pesoAtual;
- 
-   public void Envelhece(double idade,double altura) {  
-    if (idade < 21){
-      altura = altura + 0.5;      
+    public string nome;
+    public int conta;
+    public double saldo = 0.0;
+
+    public string AlteraNome (string novoNome) {
+      if (nome != novoNome){
+        nome = novoNome;
+        return "Nome alterado com sucesso!";
+      } else {
+        return "Mesmo nome detectado!";
+      }
     }
-    idade +=1;   
-    Console.WriteLine("Idade :  {0} \nAltura: {1}" ,idade , altura);
- 
-  }
-   public double Engorda(double pesoNovo,double pesoAtual) {
-      peso = pesoAtual + pesoNovo;
-      return peso;    
-  }
-    public double Emagrece(double pesoNovo,double pesoAtual) {
-      peso = pesoAtual - pesoNovo;
-      return peso;    
-  }
-    
-   //FUNÇÃO MOSTRAR O NOVO RESULTADO
-   public void Exibir(string nome, int idade, double peso,double altura){
-    Console.WriteLine("Nome: {0}, idade: {1}, peso: {2}, altura: {3}", nome, idade, peso, altura);
-    Console.WriteLine("---------1 ano se passou----------");
-    Console.WriteLine("Nome:"+ nome);
-    Envelhece(idade,altura);
-    Console.WriteLine("Peso atual: " + Emagrece(10,peso));
 
+    public int Saque(double novoSaque) {
+      if(saldo - novoSaque < 0) {
+        return 0;
+      } else {
+        saldo = saldo - novoSaque;
+        return 1;
+      }
+    }
+
+    public int Deposito(double novoDep) {
+      saldo = saldo + novoDep;
+      return 1;
+    }
   }
 
-  public static void Main (string[] args) {
-    Pessoa Entrada = new Pessoa(); 
-    Entrada.Exibir("Daniel",24,80,1.74);
+class MainClass {
+
+  public void Operacoes () {
+    NovaConta Novo = new NovaConta();
+    Console.WriteLine(Novo.saldo);
   }
 
 }
